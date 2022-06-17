@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "830702677901",
+    "project_id": "globo-gym",
+    "storage_bucket": "globo-gym.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830702677901:android:f33beb4816f4987c0197c4",
+        "android_client_info": {
+          "package_name": "com.example.globo_gym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830702677901-ceqo1gvji0najjpd6tgusondttfgbejd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHjxe-oaahaVp0aEF21s_Nz0aY-CW8oIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830702677901-ceqo1gvji0najjpd6tgusondttfgbejd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,9 @@
 # globo_gym
 
 A new Flutter project.
-
+For testing 
+email: test@gmail.com 
+password: test12345
 ## Getting Started
 
 This project is a starting point for a Flutter application.

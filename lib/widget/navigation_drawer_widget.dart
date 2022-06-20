@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:globo_gym/data/drawer_items.dart';
 import 'package:globo_gym/model/drawer_item.dart';
 import 'package:globo_gym/page/bmi_calculator.dart';
+import 'package:globo_gym/page/exercise_page.dart';
+import 'package:globo_gym/page/exercise_videos.dart';
 import 'package:globo_gym/page/home_page.dart';
+import 'package:globo_gym/page/statistics.dart';
 import 'package:globo_gym/page/weather_screen.dart';
 import 'package:globo_gym/provider/navigation_provider.dart';
 import 'package:globo_gym/services/makingPhoneCall.dart';
@@ -88,10 +91,10 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateTo(HomePage());
         break;
       case 1:
-        navigateTo(HomePage());
+        navigateTo(Statistics());
         break;
       case 2:
-        navigateTo(HomePage());
+        navigateTo(ExerciseVideos());
         break;
       case 3:
         navigateTo(HomePage());

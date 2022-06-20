@@ -1,3 +1,4 @@
+//@dart 2.7
 import 'package:video_player/video_player.dart';
 
 class Exercise {
@@ -5,7 +6,7 @@ class Exercise {
   final Duration duration;
   final int noOfReps;
   final String videoUrl;
-  late VideoPlayerController controller;
+  VideoPlayerController? controller;
 
   Exercise({
     required this.name,

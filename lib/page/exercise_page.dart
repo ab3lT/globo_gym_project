@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:globo_gym/model/exercise.dart';
 import 'package:globo_gym/model/exercise_set.dart';
+import 'package:globo_gym/widget/navigation_drawer_widget.dart';
 import 'package:globo_gym/widget/video_conrols_wideget.dart';
 import 'package:globo_gym/widget/video_player_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ExercisePage extends StatefulWidget {
   final ExerciseSet exerciseSet;
@@ -32,10 +34,16 @@ class _ExercisePageState extends State<ExercisePage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(currentExercise.name),
+          title: Text(currentExercise.name,
+              style: GoogleFonts.bebasNeue(
+                fontSize: 32,
+                color: Color(0xFF40D876),
+                letterSpacing: 1.8,
+              )),
           centerTitle: true,
-          elevation: 0,
+          elevation: 5,
         ),
+        drawer: NavigationDrawerWidget(),
         extendBodyBehindAppBar: true,
         body: Stack(
           children: [
@@ -68,9 +76,9 @@ class _ExercisePageState extends State<ExercisePage> {
         onTogglePlaying: (isPlaying) {
           setState(() {
             if (isPlaying) {
-              currentExercise.controller.play();
+              currentExercise.controller?.play();
             } else {
-              currentExercise.controller.pause();
+              currentExercise.controller?.pause();
             }
           });
         },

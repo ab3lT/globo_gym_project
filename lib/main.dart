@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       create: (context) => NavigationProvider(),
       child: MaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(primaryColor: Color(0xFFff6369)),
+          theme: ThemeData(primaryColor: Color(0xFF40D876)),
           home: const Welcome(),
           routes: <String, WidgetBuilder>{
             '/landingpage': (BuildContext context) => new MyApp(),

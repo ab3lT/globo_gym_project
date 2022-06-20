@@ -84,12 +84,12 @@ class VideoControlsWidget extends StatelessWidget {
       );
 
   Widget buildPlayButton(BuildContext context) {
-    final isLoading =
-        exercise.controller == null || !exercise.controller.value.isInitialized;
+    final isLoading = exercise.controller == null ||
+        !exercise.controller!.value.isInitialized;
 
     if (isLoading) {
       return Center(child: CircularProgressIndicator());
-    } else if (exercise.controller.value.isPlaying) {
+    } else if (exercise.controller!.value.isPlaying) {
       return buildButton(
         context,
         icon: Icon(Icons.pause, size: 30, color: Colors.white),

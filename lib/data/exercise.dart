@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:globo_gym/model/exercise.dart';
 
 final exercises1 = [

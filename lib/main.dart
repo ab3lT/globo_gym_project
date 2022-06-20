@@ -9,8 +9,17 @@ import 'package:globo_gym/data/user_simple_preferences.dart';
 import 'package:globo_gym/page/home_page.dart';
 import 'package:globo_gym/page/welcome_splash_page.dart';
 import 'package:globo_gym/provider/navigation_provider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

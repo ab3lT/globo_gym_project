@@ -3,7 +3,7 @@
 A new Flutter project.
 For testing 
 email: test@gmail.com 
-password: test12345
+password: 12345678
 ## Getting Started
 
 This project is a starting point for a Flutter application.

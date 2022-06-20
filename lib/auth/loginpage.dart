@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:globo_gym/data/user_simple_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,11 +13,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late String _email;
+  String _email = "";
   late String _password;
   final formKey = GlobalKey<FormState>(); //key for form
   String name = "";
   late String value;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    _email = UserSimplePreferences.getUserEmail() ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -55,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: height * 0.05,
                   ),
                   TextFormField(
+                    initialValue: _email,
                     style: const TextStyle(color: Color(0xFF40D876)),
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -139,10 +148,10 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xFF40D876),
                           textColor: Colors.white,
                           elevation: 7.0,
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              const snackBar = const SnackBar(
-                                  content: Text('Submitting form'));
+                              const snackBar =
+                                  SnackBar(content: Text('Submitting form'));
                               FirebaseAuth.instance
                                   .signInWithEmailAndPassword(
                                       email: _email, password: _password)
@@ -152,6 +161,8 @@ class _LoginPageState extends State<LoginPage> {
                               }).catchError((e) {
                                 print(e);
                               });
+                              await UserSimplePreferences.setUserEmail(_email);
+
                               _scaffoldKey.currentState!.showSnackBar(snackBar);
                             }
                           }),

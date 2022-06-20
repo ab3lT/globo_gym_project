@@ -172,92 +172,96 @@ class _LoginPageState extends State<LoginPage> {
                         }),
                   ]),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RaisedButton(
-                          child: Text("Sing in with Google"),
-                          color: Color(0xFF40D876),
-                          textColor: Colors.white,
-                          elevation: 7.0,
-                          onPressed: () async {
-                            setState(() {
-                              loading = true;
-                            });
-                            final googleSignIn =
-                                GoogleSignIn(scopes: ['email']);
+                      Center(
+                        child: RaisedButton(
+                            child: Text("Sing in with Google"),
+                            color: Color(0xFF40D876),
+                            textColor: Colors.white,
+                            elevation: 7.0,
+                            onPressed: () async {
+                              setState(() {
+                                loading = true;
+                              });
+                              final googleSignIn =
+                                  GoogleSignIn(scopes: ['email']);
 
-                            try {
-                              final googleSiginInAccount =
-                                  await googleSignIn.signIn();
-                              if (googleSiginInAccount == null) {
+                              try {
+                                final googleSiginInAccount =
+                                    await googleSignIn.signIn();
+                                if (googleSiginInAccount == null) {
+                                  setState(() {
+                                    loading = false;
+                                  });
+                                  return;
+                                }
+                                final googleSignInAuthentication =
+                                    await googleSiginInAccount.authentication;
+                                final credential =
+                                    GoogleAuthProvider.credential(
+                                  accessToken:
+                                      googleSignInAuthentication.accessToken,
+                                  idToken: googleSignInAuthentication.idToken,
+                                );
+                                await FirebaseAuth.instance
+                                    .signInWithCredential(credential);
+                                await FirebaseFirestore.instance
+                                    .collection('userGoolge')
+                                    .add({
+                                  'email': googleSiginInAccount.email,
+                                  'imageurl': googleSiginInAccount.photoUrl,
+                                  'name': googleSiginInAccount.displayName,
+                                });
+
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (_) => HomePage()),
+                                    (route) => false);
+                              } on FirebaseAuthException catch (e) {
+                                var content = '';
+                                switch (e.code) {
+                                  case "account-exists-with-different-credential":
+                                    content =
+                                        'This account exists with a different sign in provider';
+                                    break;
+                                  case "Invalid-credential":
+                                    content = 'Unknown error has occurred';
+                                    break;
+                                  case "operation-not-allowed":
+                                    content = 'This operation is not allowed';
+                                    break;
+                                  case "user-disabled  ":
+                                    content =
+                                        'The user you tride to log into is disabled';
+                                    break;
+                                  case "user-not-found  ":
+                                    content =
+                                        'The user you tride to log was not found';
+                                    break;
+                                }
+                              } catch (e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                            title: Text(
+                                                'Log in with google failed'),
+                                            content: Text(
+                                                'An unkonwn error occurred'),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text("ok"))
+                                            ]));
+                              } finally {
                                 setState(() {
                                   loading = false;
                                 });
-                                return;
                               }
-                              final googleSignInAuthentication =
-                                  await googleSiginInAccount.authentication;
-                              final credential = GoogleAuthProvider.credential(
-                                accessToken:
-                                    googleSignInAuthentication.accessToken,
-                                idToken: googleSignInAuthentication.idToken,
-                              );
-                              await FirebaseAuth.instance
-                                  .signInWithCredential(credential);
-                              await FirebaseFirestore.instance
-                                  .collection('userGoolge')
-                                  .add({
-                                'email': googleSiginInAccount.email,
-                                'imageurl': googleSiginInAccount.photoUrl,
-                                'name': googleSiginInAccount.displayName,
-                              });
-
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(builder: (_) => HomePage()),
-                                  (route) => false);
-                            } on FirebaseAuthException catch (e) {
-                              var content = '';
-                              switch (e.code) {
-                                case "account-exists-with-different-credential":
-                                  content =
-                                      'This account exists with a different sign in provider';
-                                  break;
-                                case "Invalid-credential":
-                                  content = 'Unknown error has occurred';
-                                  break;
-                                case "operation-not-allowed":
-                                  content = 'This operation is not allowed';
-                                  break;
-                                case "user-disabled  ":
-                                  content =
-                                      'The user you tride to log into is disabled';
-                                  break;
-                                case "user-not-found  ":
-                                  content =
-                                      'The user you tride to log was not found';
-                                  break;
-                              }
-                            } catch (e) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                          title:
-                                              Text('Log in with google failed'),
-                                          content:
-                                              Text('An unkonwn error occurred'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text("ok"))
-                                          ]));
-                            } finally {
-                              setState(() {
-                                loading = false;
-                              });
-                            }
-                          }),
+                            }),
+                      ),
                     ],
                   ),
                   SizedBox(

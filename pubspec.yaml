@@ -52,6 +52,9 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_launcher_icons: ^0.9.3
   google_sign_in: ^5.3.3
+  
+
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

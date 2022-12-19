@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Center(
                         child: RaisedButton(
-                            child: Text("Sing in with Google"),
+                            child: Text("Log in with Google"),
                             color: Color(0xFF40D876),
                             textColor: Colors.white,
                             elevation: 7.0,

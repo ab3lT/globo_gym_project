@@ -2,6 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:globo_gym/auth/login.dart';
+import 'package:globo_gym/auth/phoneAuth.dart';
 import 'package:globo_gym/data/drawer_items.dart';
 import 'package:globo_gym/model/drawer_item.dart';
 import 'package:globo_gym/page/bmi_calculator.dart';
@@ -97,7 +99,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateTo(ExerciseVideos());
         break;
       case 3:
-        navigateTo(HomePage());
+        navigateTo(LoginScreen());
         break;
       case 4:
         navigateTo(BmiCalculator());
